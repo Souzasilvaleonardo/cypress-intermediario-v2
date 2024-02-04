@@ -30,3 +30,19 @@ Cypress.Commands.add('api_deleteProjects', function() {
     }))
   )
 })
+
+Cypress.Commands.add('api_createIssue', function(issue) {
+  cy.api_createProject(issue.project)
+    .then (response => {
+      cy.request({
+        method: 'POST',
+        url: `/api/v4/projects/${response.body.id}/issues`,
+        body: {
+          title: issue.title,
+          description: issue.description
+        },
+        headers: { Authorization: accessToken },
+      })
+    })
+
+})
