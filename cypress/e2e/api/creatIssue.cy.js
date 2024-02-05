@@ -16,7 +16,7 @@ describe('Create issue', function() {
     }
 
     cy.api_createIssue(issue)
-      .then(response => {
+      .then(function(response) {
         expect(response.status).to.equal(201)
         expect(response.body.title).to.equal(issue.title)
         expect(response.body.description).to.equal(issue.description)
